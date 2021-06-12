@@ -90,22 +90,44 @@ const asc = [1, 2, 4, 7, 8, 12, 15, 19, 24, 50, 69, 80, 100];
 
 // console.log(iterativeMerge(nums));
 
-const iterativeBinary = (arr, x) => {
-  let [start, end] = [0, arr.length - 1];
-  let mid;
+// const binarySearch = (arr, x) => {
+//   let half = Math.floor((arr.length - 1) / 2);
+//   let midVal = arr[half];
 
-  while (start < end) {
-    mid = Math.floor((start + end) / 2);
-    if (arr[mid] == x) return mid;
+//   if (midVal == x) return half;
 
-    if (x > arr[mid]) {
-      start = mid + 1;
-    } else {
-      end = mid - 1;
-    }
-  }
+//   while (half >= 0) {
+//     if (midVal > x) {
+//       let left = arr.slice(0, half);
+//       return binarySearch(left, x);
+//     } else {
+//       let right = arr.slice(half + 1);
+//       let bin = binarySearch(right,x)
+//       return bin == -1 ? bin : half + 1 + bin;
+//     }
+//   }
 
-  return arr[start] == x ? start : -1;
-};
+//   return -1
+// };
 
-console.log(iterativeBinary(asc, 69));
+// console.log(binarySearch(asc, 12));
+
+// const iterativeBinary = (arr, x) => {
+//   let [start, end] = [0, arr.length - 1];
+//   let mid;
+
+//   while (start < end) {
+//     mid = Math.floor((start + end) / 2);
+//     if (arr[mid] == x) return mid;
+
+//     if (x > arr[mid]) {
+//       start = mid + 1;
+//     } else {
+//       end = mid - 1;
+//     }
+//   }
+
+//   return arr[start] == x ? start : -1;
+// };
+
+// console.log(iterativeBinary(asc, 69));
