@@ -1,5 +1,7 @@
 const nums = [14, 7, 3, 12, 1, 9, 11, 1, 6, 8, 2, 0];
 const asc = [1, 2, 4, 7, 8, 12, 15, 19, 24, 50, 69, 80, 100];
+let first = [-2, -1, 3, 5, 6, 8];
+let second = [0, 1, 2, 5, 9];
 
 // const mergeSort = (arr, half = arr.length / 2) => {
 //   if (arr.length < 2) return arr;
@@ -131,3 +133,72 @@ const asc = [1, 2, 4, 7, 8, 12, 15, 19, 24, 50, 69, 80, 100];
 // };
 
 // console.log(iterativeBinary(asc, 69));
+
+// function twoArr(arr1, arr2, k) {
+//   let sorted = [];
+
+//   while (arr1.length && arr2.length) {
+//     if (arr1[0] > arr2[0]) {
+//       sorted.push(arr2.shift());
+//     } else {
+//       sorted.push(arr1.shift());
+//     }
+//   }
+//   let all = sorted.concat(arr1, arr2);
+//   return all[all.length-k];
+// }
+
+// let efficienTwo = (arr1, arr2, k) => {
+//   let total = arr1.length + arr2.length;
+//   let stop = total - k;
+//   let i = 0;
+//   let j = 0;
+//   let current;
+
+//   while (i + j <= stop) {
+//     if (i < arr1.length && j < arr2.length) {
+//       if (arr1[i] > arr2[j]) {
+//         current = arr2[j];
+//         j++;
+//       } else {
+//         current = arr1[i];
+//         i++;
+//       }
+//     } else {
+//       if (i == arr1.length) {
+//         current = arr2[j];
+//         j++;
+//       } else {
+//         current = arr1[i];
+//         i++;
+//       }
+//     }
+//   }
+//   return current;
+// };
+
+// console.log(efficienTwo(first, second, 4));
+
+const subArr = (arr) => {
+  let highNum;
+  let highSeq;
+  let curNum;
+  let current = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    current = [arr[i]];
+    curNum = arr[i];
+    for (let j = i + 1; j < arr.length; j++) {
+      curNum += arr[j];
+      current.push(arr[j]);
+      if (curNum > highNum || highNum == undefined) {
+        highNum = curNum;
+        highSeq = [...current]
+      }
+    }
+  }
+
+  return highSeq;
+};
+
+console.log(subArr([-2, 1, -3, 4, -1, 2, 1, -5, 4]));
