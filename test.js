@@ -1,5 +1,6 @@
 const nums = [14, 7, 3, 12, 1, 9, 11, 1, 6, 8, 2, 0];
 const asc = [1, 2, 4, 7, 8, 12, 15, 19, 24, 50, 69, 80, 100];
+[1, 2, 4];
 let first = [-2, -1, 3, 5, 6, 8];
 let second = [0, 1, 2, 5, 9];
 
@@ -45,8 +46,8 @@ let second = [0, 1, 2, 5, 9];
 // console.log(bubbleSort(nums));
 
 // const quickSort = (arr, pivot = arr.pop()) => {
-//   if (!pivot) return [];
-
+//   // save an iteration with if(arr.length < 2) instead
+//   if (pivot == undefined) return [];
 //   let left = [];
 //   let right = [];
 
@@ -93,26 +94,27 @@ let second = [0, 1, 2, 5, 9];
 // console.log(iterativeMerge(nums));
 
 // const binarySearch = (arr, x) => {
-//   let half = Math.floor((arr.length - 1) / 2);
+//   let half = Math.ceil((arr.length - 1) / 2);
+//   // let half = Math.floor((arr.length - 1) / 2);
 //   let midVal = arr[half];
 
 //   if (midVal == x) return half;
-
-//   while (half >= 0) {
+//   if (arr.length < 2) return -1;
+//   // while (half >= 0) {
 //     if (midVal > x) {
 //       let left = arr.slice(0, half);
 //       return binarySearch(left, x);
 //     } else {
 //       let right = arr.slice(half + 1);
-//       let bin = binarySearch(right,x)
+//       let bin = binarySearch(right, x);
 //       return bin == -1 ? bin : half + 1 + bin;
 //     }
-//   }
+//   // }
 
-//   return -1
+//   return -1;
 // };
 
-// console.log(binarySearch(asc, 12));
+// console.log(binarySearch(asc, 80));
 
 // const iterativeBinary = (arr, x) => {
 //   let [start, end] = [0, arr.length - 1];
@@ -179,26 +181,57 @@ let second = [0, 1, 2, 5, 9];
 
 // console.log(efficienTwo(first, second, 4));
 
-const subArr = (arr) => {
-  let highNum;
-  let highSeq;
-  let curNum;
-  let current = [];
+// const subArr = (arr) => {
+//   let highNum;
+//   let highSeq;
+//   let curNum;
+//   let current = [];
 
-  for (let i = 0; i < arr.length; i++) {
-    current = [arr[i]];
-    curNum = arr[i];
-    for (let j = i + 1; j < arr.length; j++) {
-      curNum += arr[j];
-      current.push(arr[j]);
-      if (curNum > highNum || highNum == undefined) {
-        highNum = curNum;
-        highSeq = [...current]
+//   for (let i = 0; i < arr.length; i++) {
+//     current = [arr[i]];
+//     curNum = arr[i];
+//     for (let j = i + 1; j < arr.length; j++) {
+//       curNum += arr[j];
+//       current.push(arr[j]);
+//       if (curNum > highNum || highNum == undefined) {
+//         highNum = curNum;
+//         highSeq = [...current]
+//       }
+//     }
+//   }
+
+//   return highSeq;
+// };
+
+// console.log(subArr([-2, 1, -3, 4, -1, 2, 1, -5, 4]));
+
+let matrix = [
+  [1, 2, 1, 4, 8],
+
+  [3, 7, 8, 5, 1],
+
+  [8, 7, 7, 3, 1],
+
+  [8, 1, 2, 7, 9],
+];
+
+const mats = (vals) => {
+  let tracker = {};
+  let present = []
+  for (let i = 0; i < vals.length; i++) {
+    for (let j = 0; j < vals[i].length; j++) {
+      let current = vals[i][j];
+      if (!tracker[current]) tracker[current] = [];
+      if (tracker[current][tracker[current].length - 1] !== i) {
+        tracker[current].push(i);
+      }
+
+      if (tracker[current].length == vals.length) {
+        present.push(current)
       }
     }
   }
-
-  return highSeq;
+  return present;
 };
 
-console.log(subArr([-2, 1, -3, 4, -1, 2, 1, -5, 4]));
+console.log(mats(matrix));
